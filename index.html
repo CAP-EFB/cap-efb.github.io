@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Mission Log — CAP observer log for iPad</title>
   <meta name="description" content="Mission Log is an offline mission log for Civil Air Patrol observers. Install it on an iPad from Safari in under a minute.">
-  <meta name="theme-color" content="#1c2632">
+  <meta name="theme-color" content="#062a55">
   <link rel="icon" href="icon-192.png" type="image/png">
   <link rel="apple-touch-icon" href="icon-180.png">
   <style>
@@ -59,7 +59,10 @@
     .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
 
     .hero {
-      background: var(--chrome);
+      /* chart artwork, dimmed a little so the text stays easy to read */
+      background:
+        linear-gradient(rgba(6, 30, 62, .5), rgba(6, 30, 62, .5)),
+        #062a55 url(hero.jpg) center / cover no-repeat;
       color: var(--chrome-text);
       padding: max(28px, env(safe-area-inset-top)) 0 30px;
     }
@@ -85,6 +88,21 @@
     }
     .btn:active { transform: scale(.985); }
     .hero .hint { color: var(--chrome-muted); font-size: 13.5px; margin-top: 10px; }
+    .hero .lead + .lead { margin-top: 12px; }
+    .hero .privacy {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 11px 14px;
+      max-width: 60ch;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .06);
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .hero .privacy svg { width: 20px; height: 20px; flex: none; color: #6ad59c; }
 
     main { padding: 18px 0 36px; display: flex; flex-direction: column; gap: 14px; }
 
@@ -170,8 +188,14 @@
         with photos, notes and sketch, the SAR results worksheet, and a signed PDF at the end. It works
         with no signal.
       </p>
-      <a class="btn" href="cap-mission-log/">Open Mission Log</a>
-      <div class="hint">Open it in Safari on the iPad, then follow the steps below.</div>
+      <p class="lead"><strong>Install it on your iPad.</strong> Installed, it has its own app icon, opens full
+        screen and keeps working with no connection. Using it as a web page in Safari is not enough.</p>
+      <a class="btn" href="cap-mission-log/">Open Mission Log to install it</a>
+      <div class="hint">Open it in Safari on the iPad, tap Share, then Add to Home Screen. The steps are below.</div>
+      <p class="privacy">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
+        <span>Everything you enter is stored on your device only. Nothing is shared with the cloud.</span>
+      </p>
     </div>
   </header>
 
@@ -208,11 +232,25 @@
       </section>
 
       <section class="card">
+        <h2>Your data stays on your device</h2>
+        <div class="card-body">
+          <p>
+            Mission Log has no account, no sign-in and no server. Logs, positions, photos, notes and
+            signatures are stored locally on your iPad and are <strong>not sent to the cloud</strong>
+            or to anyone else.
+          </p>
+          <p>
+            Data leaves the iPad only when you choose to export or share it yourself, for example the
+            PDF or a backup file. Because nothing is stored anywhere else, keeping backups is up to you.
+          </p>
+        </div>
+      </section>
+
+      <section class="card">
         <h2>Good to know</h2>
         <div class="card-body">
           <ul class="plain">
             <li><strong>Offline.</strong> After the first launch the app is stored on the iPad and works in the aircraft with no connection.</li>
-            <li><strong>Your data stays on the iPad.</strong> There is no account and no server. Nothing is uploaded.</li>
             <li><strong>Back up after each mission.</strong> Use Menu → Export backup and save the PDF to Files. Removing the app from the Home Screen deletes its logs.</li>
             <li><strong>Updates are automatic.</strong> When the iPad is online, the app picks up a new version the next time you switch back to it.</li>
             <li><strong>GPS.</strong> Cellular iPads have a real GPS receiver. A Wi-Fi-only iPad needs an external GPS for a usable position in flight.</li>
