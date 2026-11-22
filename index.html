@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Observer Log — CAP observer mission log for iPad</title>
+  <meta name="description" content="Observer Log is an offline mission log for Civil Air Patrol observers. Install it on an iPad from Safari in under a minute.">
+  <meta name="theme-color" content="#1c2632">
+  <link rel="icon" href="icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --chrome: #1c2632;
+      --chrome-text: #f2f6fa;
+      --chrome-muted: #9aa9b8;
+      --bg: #dde2e8;
+      --card: #ffffff;
+      --text: #17212b;
+      --muted: #5b6977;
+      --line: #d2d9e1;
+      --head: #3a4959;
+      --head-text: #eef3f7;
+      --blue: #1270c0;
+      --blue-btn: #1877cc;
+      --blue-soft: #e1eefb;
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c1218;
+        --card: #18212b;
+        --text: #e8eef4;
+        --muted: #93a3b3;
+        --line: #2a3644;
+        --head: #283545;
+        --blue: #58adf6;
+        --blue-btn: #1f7fd4;
+        --blue-soft: #12324f;
+        color-scheme: dark;
+      }
+    }
+
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+    h1, h2, p, ol, ul { margin: 0; }
+    a { color: var(--blue); }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+    .hero {
+      background: var(--chrome);
+      color: var(--chrome-text);
+      padding: max(28px, env(safe-area-inset-top)) 0 30px;
+    }
+    .hero-row { display: flex; align-items: center; gap: 18px; }
+    .hero img { width: 84px; height: 84px; flex: none; display: block; }
+    .hero h1 { font-size: 30px; line-height: 1.15; letter-spacing: -.01em; }
+    .hero .tag { color: var(--chrome-muted); font-size: 16px; margin-top: 4px; }
+    .hero .lead { margin-top: 20px; font-size: 17px; max-width: 60ch; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 22px;
+      margin-top: 22px;
+      border-radius: 8px;
+      background: var(--blue-btn);
+      color: #fff;
+      font-size: 17px;
+      font-weight: 650;
+      text-decoration: none;
+    }
+    .btn:active { transform: scale(.985); }
+    .hero .hint { color: var(--chrome-muted); font-size: 13.5px; margin-top: 10px; }
+
+    main { padding: 18px 0 36px; display: flex; flex-direction: column; gap: 14px; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .card h2 {
+      background: var(--head);
+      color: var(--head-text);
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      padding: 14px 16px;
+    }
+    .card-body { padding: 16px; }
+    .card-body p + p { margin-top: 10px; }
+
+    ol.steps { list-style: none; padding: 0; counter-reset: step; }
+    ol.steps li {
+      counter-increment: step;
+      position: relative;
+      padding: 0 0 16px 46px;
+      min-height: 32px;
+    }
+    ol.steps li:last-child { padding-bottom: 0; }
+    ol.steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: -2px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    ol.steps small { display: block; color: var(--muted); font-size: 14px; margin-top: 2px; }
+
+    ul.plain { padding-left: 20px; }
+    ul.plain li + li { margin-top: 6px; }
+
+    .url {
+      font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 15px;
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: 13.5px;
+      padding: 0 0 max(28px, env(safe-area-inset-bottom));
+    }
+    footer p + p { margin-top: 8px; }
+
+    @media (max-width: 520px) {
+      .hero img { width: 64px; height: 64px; }
+      .hero h1 { font-size: 25px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-row">
+        <img src="emblem.png" alt="" width="84" height="84">
+        <div>
+          <h1>Observer Log</h1>
+          <div class="tag">An offline mission log for Civil Air Patrol observers</div>
+        </div>
+      </div>
+      <p class="lead">
+        The observer's kneeboard card on an iPad: checkpoint times, flight log, OPS checks, observations
+        with photos, notes and sketch, the SAR results worksheet, and a signed PDF at the end. It works
+        with no signal.
+      </p>
+      <a class="btn" href="cap-flight-log/">Open Observer Log</a>
+      <div class="hint">Open it in Safari on the iPad, then follow the steps below.</div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <main>
+
+      <section class="card">
+        <h2>Install on an iPad</h2>
+        <div class="card-body">
+          <ol class="steps">
+            <li>
+              Open <strong>Safari</strong> on the iPad and go to
+              <a class="url" href="cap-flight-log/">cap-efb.github.io/cap-flight-log</a>.
+              <small>It has to be Safari. Do this once while you have Wi-Fi or cellular.</small>
+            </li>
+            <li>
+              Tap the <strong>Share</strong> button.
+              <small>The square with an arrow pointing up, in the Safari toolbar.</small>
+            </li>
+            <li>
+              Choose <strong>Add to Home Screen</strong>, then tap <strong>Add</strong>.
+              <small>You may need to scroll down in the list to find it. If you see an “Open as Web App” switch, leave it on.</small>
+            </li>
+            <li>
+              Close Safari and open <strong>Observer Log</strong> from its new Home Screen icon.
+              <small>Always start it from this icon. It opens full screen, like any other app.</small>
+            </li>
+            <li>
+              Read and accept the disclaimer, and allow <strong>Location</strong> if you want GPS positions.
+              <small>Location Services must be on in Settings → Privacy &amp; Security.</small>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Good to know</h2>
+        <div class="card-body">
+          <ul class="plain">
+            <li><strong>Offline.</strong> After the first launch the app is stored on the iPad and works in the aircraft with no connection.</li>
+            <li><strong>Your data stays on the iPad.</strong> There is no account and no server. Nothing is uploaded.</li>
+            <li><strong>Back up after each mission.</strong> Use Menu → Export backup and save the PDF to Files. Removing the app from the Home Screen deletes its logs.</li>
+            <li><strong>Updates are automatic.</strong> When the iPad is online, the app picks up a new version the next time you switch back to it.</li>
+            <li><strong>GPS.</strong> Cellular iPads have a real GPS receiver. A Wi-Fi-only iPad needs an external GPS for a usable position in flight.</li>
+            <li><strong>Feedback.</strong> Use Menu → Send feedback in the app to report a problem or suggest something.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Before you fly with it</h2>
+        <div class="card-body">
+          <p>
+            Observer Log is not for navigation and is not a certified electronic flight bag. Check times,
+            positions and totals against the aircraft's instruments and official sources. It does not
+            replace any form or report that Civil Air Patrol or your wing requires.
+          </p>
+          <p>Try it on the ground first, and keep your paper log until you trust it.</p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>
+        Observer Log is a personal tool made by a CAP member. It is not an official Civil Air Patrol
+        product and is not affiliated with or endorsed by Civil Air Patrol, Inc. or the United States
+        Air Force. CAP names and emblems are the property of Civil Air Patrol, Inc.
+      </p>
+      <p>Source code: <a href="https://github.com/CAP-EFB/cap-flight-log">github.com/CAP-EFB/cap-flight-log</a></p>
+    </footer>
+  </div>
+
+</body>
+</html>
